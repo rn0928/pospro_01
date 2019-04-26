@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title> pospos</title>
+    <link rel="stylesheet" href="{% static 'pospos/css/style.css' %}" type="text/css">
+</head>
+
+
+<body>
+<h1> pospos</h1>
+    <form action="/" method="post">
+        {% csrf_token %}
+        <h2>post!</h2>
+        {{ form.as_p}}
+        <input type="submit" value="post">
+    </form>
+
+<div class="entries-area">
+<h2>post一覧</h2>
+    {% if postings %}
+        {% for posting in postings %}
+        <h3>{{ posting.name }}さんの書き込み({{ posting.creat_at }}):</h3> 
+        {{ posting.post|linebreaks }}
+        {% endfor %}
+    {% endif %}
+</div>
+</body>
+
+</html>
